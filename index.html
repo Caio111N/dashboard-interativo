@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Interativo</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Dashboard Interativo</h1>
+    <button id="toggleTheme">🌙 Dark</button>
+  </header>
+
+  <!-- KPIs -->
+  <section class="kpis">
+    <div class="kpi-card sales">📊 Total Vendas: <span id="kpiSales">0</span></div>
+    <div class="kpi-card users">👥 Usuários: <span id="kpiUsers">0</span></div>
+    <div class="kpi-card weather">🌡️ Temp. Média: <span id="kpiWeather">0°C</span></div>
+  </section>
+
+  <main>
+    <div class="dashboard">
+      <div class="row">
+        <section class="card">
+          <h2>Vendas Mensais</h2>
+          <canvas id="salesChart"></canvas>
+        </section>
+
+        <section class="card">
+          <h2>Usuários por Cidade</h2>
+          <canvas id="usersChart"></canvas>
+        </section>
+      </div>
+
+      <div class="row">
+        <section class="card">
+          <h2>Temperatura Diária</h2>
+          <canvas id="weatherChart"></canvas>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Projeto desenvolvido por Caio — Portfólio</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="sales.js"></script>
+  <script src="users.js"></script>
+  <script src="weather.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
