@@ -1,16 +1,24 @@
-Dashboard interativo de performance comercial desenvolvido para demonstrar domínio em front-end, design sistemático, manipulação de estado, dados assíncronos e experiência de usuário de alto nível. O projeto simula um painel executivo com KPIs de vendas, usuários e temperatura, além de filtros dinâmicos, comparação de períodos, drill-down em gráficos, exportação de dados, dark mode e carregamento inteligente com estados de loading e erro.
+#  Dashboard Interativo
 
-A proposta foi unir visual refinado, arquitetura limpa e boa experiência de uso em uma interface que funciona como um portfólio técnico para recrutadores e times de tecnologia. Durante o desenvolvimento, foquei em conceitos importantes como design tokens, acessibilidade, responsividade, performance, organização de código e criação de um fluxo de dados mais próximo de um ambiente real, usando dados mockados em camada de serviço para simular uma API.
+Um projeto de portfólio que demonstra a criação de um **dashboard interativo** com gráficos dinâmicos, KPIs visuais e suporte a tema claro/escuro.  
+Construído com **HTML, CSS, JavaScript e Chart.js**.
 
-Principais destaques:
 
-Filtros funcionais por período e cidade
-Comparação entre períodos
-KPIs interativos com foco visual
-Drill-down em barras para análise detalhada
-Loading skeleton e tratamento de erro com retry
-Exportação em CSV e PNG
-Dark mode e atalhos de teclado
-Design responsivo e mobile-first
-Código organizado, testável e pronto para evolução
-Este projeto foi pensado como uma peça de portfólio para comunicar não apenas estética, mas também capacidade de resolver problemas reais de produto, priorizar UX e aplicar boas práticas de desenvolvimento frontend.
+##  Funcionalidades
+- Gráficos dinâmicos (vendas, usuários por cidade e temperatura diária).
+- KPIs visuais destacados com ícones e cores.
+- Alternância entre tema **claro 🌙** e **escuro ☀️** com persistência no navegador.
+- Dados de usuários buscados via **API pública (JSONPlaceholder)**.
+- Atualização automática dos indicadores.
+- Layout responsivo e moderno.
+
+
+## 🛠️ Tecnologias utilizadas
+- **HTML5** e **CSS3** para estrutura e estilo.
+- **JavaScript (ES6+)** para lógica e interatividade.
+- **Chart.js** para renderização dos gráficos.
+- **LocalStorage** para salvar preferências de tema.
+
+##  Demo online
+Este projeto está publicado no **GitHub Pages**:  
+👉 [Acesse aqui](https://Caio111N.github.io/dashboard-interativo/)
