@@ -1,56 +1,215 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Interativo</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-  <header>
-    <h1>Dashboard Interativo</h1>
-    <button id="toggleTheme">🌙 Dark</button>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Dashboard interativo de performance comercial com filtros, KPIs e exportação de dados para portfólio profissional." />
+    <meta property="og:title" content="Dashboard Interativo | Portfólio Front-end" />
+    <meta property="og:description" content="Dashboard analytics com gráficos, filtros dinâmicos e UX premium para demonstrar habilidades em front-end." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./assets/preview-dashboard.svg" />
+    <meta property="og:url" content="https://example.com/dashboard" />
+    <title>Dashboard Interativo | Portfólio Front-end</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%235b74f2'/%3E%3Cpath d='M18 42h5V31h-5zm11 0h5V20h-5zm11 0h5V26h-5z' fill='white'/%3E%3Cpath d='M18 18l9 8 7-9 9 13' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="header-copy">
+          <p class="eyebrow">Portfolio · Frontend Analytics</p>
+          <h1>Dashboard Interativo</h1>
+        </div>
 
-  <!-- KPIs -->
-  <section class="kpis">
-    <div class="kpi-card sales">📊 Total Vendas: <span id="kpiSales">0</span></div>
-    <div class="kpi-card users">👥 Usuários: <span id="kpiUsers">0</span></div>
-    <div class="kpi-card weather">🌡️ Temp. Média: <span id="kpiWeather">0°C</span></div>
-  </section>
+        <div class="header-actions">
+          <button id="toggleTheme" type="button" class="ghost-button" aria-label="Alternar para tema escuro ou claro">
+            <span class="theme-icon" aria-hidden="true">🌙</span>
+            <span class="theme-text">Dark</span>
+          </button>
+          <button id="refreshDataBtn" type="button" class="primary-button">Atualizar dados</button>
+          <button id="shareBtn" type="button" class="secondary-button">Compartilhar</button>
+        </div>
+      </header>
 
-  <main>
-    <div class="dashboard">
-      <div class="row">
-        <section class="card">
-          <h2>Vendas Mensais</h2>
-          <canvas id="salesChart"></canvas>
-        </section>
+      <section class="toolbar panel" aria-label="Filtros do dashboard">
+        <div class="field-group">
+          <label for="periodSelect">Período</label>
+          <select id="periodSelect">
+            <option value="7d">7 dias</option>
+            <option value="30d" selected>30 dias</option>
+            <option value="6m">6 meses</option>
+            <option value="year">Ano</option>
+          </select>
+        </div>
 
-        <section class="card">
-          <h2>Usuários por Cidade</h2>
-          <canvas id="usersChart"></canvas>
-        </section>
+        <div class="field-group">
+          <label for="citySelect">Cidade</label>
+          <select id="citySelect" aria-label="Filtrar por cidade"></select>
+        </div>
+
+        <label class="toggle-line" for="comparisonToggle">
+          <input id="comparisonToggle" type="checkbox" />
+          <span>Comparar com período anterior</span>
+        </label>
+
+        <div class="toolbar-actions">
+          <button id="simulateErrorBtn" type="button" class="secondary-button small">Simular erro</button>
+          <button id="exportCsvBtn" type="button" class="secondary-button small">Export CSV</button>
+          <button id="exportPngBtn" type="button" class="primary-button small">Export PNG</button>
+          <button id="toggleShortcutsBtn" type="button" class="secondary-button small" aria-expanded="false" aria-controls="shortcutsPanel">Atalhos</button>
+        </div>
+      </section>
+
+      <div id="errorState" class="alert hidden" role="alert" aria-live="polite"></div>
+
+      <div id="loadingState" class="loading-state hidden" aria-live="polite">
+        <div class="skeleton-block skeleton-title"></div>
+        <div class="skeleton-grid">
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+        </div>
       </div>
 
-      <div class="row">
-        <section class="card">
-          <h2>Temperatura Diária</h2>
-          <canvas id="weatherChart"></canvas>
-        </section>
+      <section class="kpis" aria-label="Indicadores principais">
+        <article class="kpi-card sales active" data-kpi="sales" tabindex="0" role="button" aria-label="Selecionar indicador de vendas">
+          <div class="kpi-header">
+            <div class="kpi-icon" aria-hidden="true">📊</div>
+            <div class="kpi-title-wrap">
+              <span class="kpi-label">Total Vendas</span>
+              <button class="help-button" type="button" data-help="Receita acumulada do período, consolidando o retorno financeiro do negócio." aria-label="Ajuda sobre vendas">?</button>
+            </div>
+          </div>
+
+          <div class="kpi-body">
+            <div class="kpi-value" id="kpiSales">R$ 0</div>
+            <div class="kpi-trend positive" id="trendSales">
+              <span class="trend-arrow" aria-hidden="true">▲</span>
+              0% vs período anterior
+            </div>
+          </div>
+        </article>
+
+        <article class="kpi-card users" data-kpi="users" tabindex="0" role="button" aria-label="Selecionar indicador de usuários">
+          <div class="kpi-header">
+            <div class="kpi-icon" aria-hidden="true">👥</div>
+            <div class="kpi-title-wrap">
+              <span class="kpi-label">Usuários</span>
+              <button class="help-button" type="button" data-help="Total de usuários ativos ou cadastrados no período selecionado." aria-label="Ajuda sobre usuários">?</button>
+            </div>
+          </div>
+
+          <div class="kpi-body">
+            <div class="kpi-value" id="kpiUsers">0</div>
+            <div class="kpi-trend positive" id="trendUsers">
+              <span class="trend-arrow" aria-hidden="true">▲</span>
+              0% vs período anterior
+            </div>
+          </div>
+        </article>
+
+        <article class="kpi-card weather" data-kpi="weather" tabindex="0" role="button" aria-label="Selecionar indicador de temperatura média">
+          <div class="kpi-header">
+            <div class="kpi-icon" aria-hidden="true">🌡️</div>
+            <div class="kpi-title-wrap">
+              <span class="kpi-label">Temp. Média</span>
+              <button class="help-button" type="button" data-help="Média de temperatura ao longo do período, útil para entender sazonalidade e padrão operacional." aria-label="Ajuda sobre temperatura média">?</button>
+            </div>
+          </div>
+
+          <div class="kpi-body">
+            <div class="kpi-value" id="kpiWeather">0°C</div>
+            <div class="kpi-trend negative" id="trendWeather">
+              <span class="trend-arrow" aria-hidden="true">▼</span>
+              0% vs período anterior
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <main class="dashboard" aria-label="Gráficos do dashboard">
+        <div class="row">
+          <section class="chart-card sales-card" data-chart="sales" aria-labelledby="salesChartTitle">
+            <div class="card-header">
+              <h2 id="salesChartTitle">Vendas por período</h2>
+            </div>
+            <div class="chart-frame">
+              <canvas id="salesChart" aria-label="Gráfico de vendas por período"></canvas>
+              <div class="empty-state hidden" id="salesEmptyState">Nenhum dado disponível para este filtro.</div>
+            </div>
+          </section>
+
+          <section class="chart-card users-card" data-chart="users" aria-labelledby="usersChartTitle">
+            <div class="card-header">
+              <h2 id="usersChartTitle">Usuários por cidade</h2>
+            </div>
+            <div class="chart-frame">
+              <canvas id="usersChart" aria-label="Gráfico de usuários por cidade"></canvas>
+              <div class="empty-state hidden" id="usersEmptyState">Nenhum dado de cidade para este filtro.</div>
+            </div>
+          </section>
+        </div>
+
+        <div class="row single">
+          <section class="chart-card weather-card" data-chart="weather" aria-labelledby="weatherChartTitle">
+            <div class="card-header">
+              <h2 id="weatherChartTitle">Temperatura diária</h2>
+            </div>
+            <div class="chart-frame">
+              <canvas id="weatherChart" aria-label="Gráfico de temperatura diária"></canvas>
+              <div class="empty-state hidden" id="weatherEmptyState">Não há temperatura para o período selecionado.</div>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <section id="aboutSection" class="about-panel panel">
+        <div class="about-header">
+          <h2>Sobre o projeto</h2>
+        </div>
+        <div class="about-grid">
+          <div>
+            <h3>Tecnologias</h3>
+            <p>HTML5 semântico, CSS moderno com design tokens, Chart.js para visualização e JavaScript modular para lógica de estado e dados simulados.</p>
+          </div>
+          <div>
+            <h3>Desafios resolvidos</h3>
+            <p>Gerenciamento de filtros, carregamento assíncrono, exportação de dados e interação em múltiplos breakpoints, tudo mantendo a experiência visual refinada.</p>
+          </div>
+          <div>
+            <h3>Aprendizado</h3>
+            <p>Foquei em arquitetura de dados, acessibilidade, performance e uso de componentes reutilizáveis para criar uma solução de portfólio com narrativa forte.</p>
+          </div>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <p>© 2026 Caio Nicollas · Dashboard analytics para portfólio</p>
+      </footer>
+    </div>
+
+    <aside id="shortcutsPanel" class="shortcuts-panel hidden" aria-label="Atalhos do dashboard">
+      <h3>Atalhos</h3>
+      <ul>
+        <li><kbd>D</kbd> alterna o tema</li>
+        <li><kbd>R</kbd> atualiza os dados</li>
+        <li><kbd>?</kbd> mostra ou esconde este painel</li>
+      </ul>
+    </aside>
+
+    <div id="detailModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="detailModalTitle">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="detailModalTitle">Detalhamento do período</h3>
+          <button id="closeModalBtn" type="button" class="close-button" aria-label="Fechar detalhamento">×</button>
+        </div>
+        <div id="detailModalBody"></div>
       </div>
     </div>
-  </main>
 
-  <footer>
-    <p>Projeto desenvolvido por Caio — Portfólio</p>
-  </footer>
-
-  <!-- Scripts -->
-  <script src="sales.js"></script>
-  <script src="users.js"></script>
-  <script src="weather.js"></script>
-  <script src="script.js"></script>
-</body>
+    <script type="module" src="script.js"></script>
+  </body>
 </html>
+

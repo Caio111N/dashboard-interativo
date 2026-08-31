@@ -1,0 +1,26 @@
+{
+  "name": "analytics-dashboard-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Dashboard interativo de analytics para portfólio com filtros, drill-down, exportação e dark mode.",
+  "license": "MIT",
+  "keywords": [
+    "dashboard",
+    "analytics",
+    "portfolio",
+    "frontend",
+    "chartjs",
+    "javascript"
+  ],
+  "scripts": {
+    "test": "vitest run",
+    "dev": "http-server . -p 8123",
+    "start": "http-server . -p 8123"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "jsdom": "^24.1.0",
+    "vitest": "^2.1.8"
+  }
+}

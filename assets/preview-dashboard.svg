@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" fill="none">
+  <rect width="1200" height="800" rx="28" fill="#EAF1FF"/>
+  <rect x="60" y="60" width="1080" height="680" rx="24" fill="#F7FAFF" stroke="#D8E5FF"/>
+  <rect x="100" y="100" width="260" height="90" rx="24" fill="#FFFFFF" stroke="#D9E3FF"/>
+  <rect x="100" y="210" width="300" height="140" rx="24" fill="#FFFFFF" stroke="#D9E3FF"/>
+  <rect x="430" y="210" width="300" height="140" rx="24" fill="#FFFFFF" stroke="#D9E3FF"/>
+  <rect x="760" y="210" width="300" height="140" rx="24" fill="#FFFFFF" stroke="#D9E3FF"/>
+  <rect x="100" y="380" width="460" height="260" rx="24" fill="#FFFFFF" stroke="#D9E3FF"/>
+  <rect x="590" y="380" width="470" height="260" rx="24" fill="#FFFFFF" stroke="#D9E3FF"/>
+  <rect x="110" y="122" width="140" height="44" rx="22" fill="#E6EDFF"/>
+  <rect x="116" y="228" width="52" height="52" rx="26" fill="#DCE6FF"/>
+  <rect x="546" y="228" width="52" height="52" rx="26" fill="#E9E4FF"/>
+  <rect x="876" y="228" width="52" height="52" rx="26" fill="#DFF7F1"/>
+  <path d="M120 322L190 290L240 250L298 220H350" stroke="#5B74F2" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M610 282H760" stroke="#B7ABFF" stroke-width="18" stroke-linecap="round"/>
+  <path d="M892 282H1010" stroke="#7BD8C5" stroke-width="18" stroke-linecap="round"/>
+  <rect x="120" y="420" width="300" height="12" rx="6" fill="#E5EBFF"/>
+  <rect x="120" y="455" width="220" height="12" rx="6" fill="#E5EBFF"/>
+  <rect x="120" y="520" width="180" height="80" rx="10" fill="#5B74F2"/>
+  <rect x="320" y="520" width="180" height="110" rx="10" fill="#7D8EF4"/>
+  <rect x="620" y="420" width="300" height="12" rx="6" fill="#E5EBFF"/>
+  <rect x="620" y="455" width="240" height="12" rx="6" fill="#E5EBFF"/>
+  <path d="M640 570C710 500 760 470 820 520C865 560 900 550 980 470" stroke="#4BB79D" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M640 570C710 500 760 470 820 520C865 560 900 550 980 470L980 620H640V570Z" fill="#DFF7F1" opacity="0.8"/>
+  <text x="128" y="168" fill="#5F6E85" font-size="24" font-family="Arial, sans-serif">Overview</text>
+  <text x="128" y="310" fill="#16263E" font-size="40" font-weight="700" font-family="Arial, sans-serif">R$ 32.4k</text>
+  <text x="136" y="122" fill="#4D5968" font-size="20" font-family="Arial, sans-serif">Period</text>
+  <text x="612" y="168" fill="#16263E" font-size="32" font-weight="700" font-family="Arial, sans-serif">Dashboard Interativo</text>
+</svg>
