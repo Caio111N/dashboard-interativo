@@ -19,6 +19,3 @@ Construído com **HTML, CSS, JavaScript e Chart.js**.
 - **Chart.js** para renderização dos gráficos.
 - **LocalStorage** para salvar preferências de tema.
 
-##  Demo online
-Este projeto está publicado no **GitHub Pages**:  
-👉 [Acesse aqui](https://Caio111N.github.io/dashboard-interativo/)
